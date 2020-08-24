@@ -1,7 +1,7 @@
 # javascript-to-do-list-assignment-Atinder-Pal
 **Author**- Atinder Pal
 
-**Purpose**- To create a To Do List application where user can add tasks to be done and then move the tasks to completed status when ther are done.
+**Purpose**- To create a To Do List application where user can add tasks to be done and then move the tasks to completed status when they are done.
 
 **Requirements:**
 The "To-Do" JavaScript program that can handle:
