@@ -21,12 +21,15 @@ const completedList = document.querySelector('#completed-tasks-list');
 myForm.addEventListener( 'submit', (event) => {
     // Stop the form from submitting! 
     event.preventDefault();
-    console.log( event );
+    //console.log( event );
 
     //Get value of New Task field from Form
     const newTask = newTaskField.value;
-    console.log( newTask );
+    //console.log( newTask );
 
+    //Clear the newTaskField after a new task is ssubmitted
+    newTaskField.value="";
+    
     //Create a new Task in the Active To-Do List and a CheckBox for that task
     const newActiveTask = document.createElement( 'li' );
     const newCheckBox = document.createElement( 'input' );
@@ -36,6 +39,7 @@ myForm.addEventListener( 'submit', (event) => {
     // console.log( newActiveTask );
 
     //Assign New task value to newly created list element 
+    newActiveTask.textContent= `${newTask}`;
 
     //Prepend the check box to the list element 
     newActiveTask.prepend( newCheckBox );
@@ -58,6 +62,8 @@ myForm.addEventListener( 'submit', (event) => {
     } );
 
 });
+
+
 
 
 

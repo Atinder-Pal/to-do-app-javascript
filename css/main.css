@@ -12,7 +12,8 @@ form, footer{
 
 fieldset:nth-of-type(2), fieldset:nth-of-type(3){   
    
-    max-height: fit-content;   
+    max-height: fit-content; 
+  
     
 }
 
