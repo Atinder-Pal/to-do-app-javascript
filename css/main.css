@@ -16,5 +16,8 @@ fieldset:nth-of-type(2), fieldset:nth-of-type(3){
   
     
 }
+.bold-text{
+    font-weight: bolder;
+}
 
 

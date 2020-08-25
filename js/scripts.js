@@ -32,10 +32,22 @@ myForm.addEventListener( 'submit', (event) => {
     
     //Create a new Task in the Active To-Do List and a CheckBox for that task
     const newActiveTask = document.createElement( 'li' );
+
+    //Create a checkbox
     const newCheckBox = document.createElement( 'input' );
     newCheckBox.type = "checkBox";
-    newCheckBox.className = "activeTaskCheckBox";
-    newCheckBox.value = `${newTask}`;
+
+    //Create Date Time element
+     const start = document.createElement(  'span' );   
+     //start.textContent = getCurrentDate().showDate;
+     
+     //Citation
+     //Took hep from 'Adolf Stary' for understanding how to pull date and display it in string
+     let startDate = new Date().toLocaleDateString();
+     let startTime = new Date().toLocaleTimeString();
+     start.textContent =  " Start: " + startDate + " " + startTime;
+    //End Citation
+    
     // console.log( newActiveTask );
 
     //Assign New task value to newly created list element 
@@ -43,6 +55,9 @@ myForm.addEventListener( 'submit', (event) => {
 
     //Prepend the check box to the list element 
     newActiveTask.prepend( newCheckBox );
+
+    newActiveTask.append(start.textContent);
+    
 
     // console.log( newActiveTask.textContent );
     // console.log( newActiveTask );
@@ -56,9 +71,14 @@ myForm.addEventListener( 'submit', (event) => {
     newCheckBox.addEventListener( 'click', (event) => {
         //Disable the check box for Completed Tasks List element
         newCheckBox.disabled = true;
+        let endDate= new Date().toLocaleDateString();
+        let endTime = new Date().toLocaleTimeString();
+        const end = document.createElement(  'span' );        
+        end.textContent = " End: "+ endDate+ " "+ endTime;
+        newActiveTask.append(end.textContent);
         
         //Move the checked list element from Active To-Do List to Completed Task list
-        completedList.appendChild( newActiveTask );
+        completedList.appendChild( newActiveTask );        
     } );
 
 });
