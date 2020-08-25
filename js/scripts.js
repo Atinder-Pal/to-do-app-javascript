@@ -27,7 +27,7 @@ myForm.addEventListener( 'submit', (event) => {
     const newTask = newTaskField.value;
     //console.log( newTask );
 
-    //Clear the newTaskField after a new task is ssubmitted
+    //Clear the newTaskField after a new task is submitted
     newTaskField.value="";
     
     //Create a new Task in the Active To-Do List and a CheckBox for that task
@@ -45,7 +45,7 @@ myForm.addEventListener( 'submit', (event) => {
      //Took hep from 'Adolf Stary' for understanding how to pull date and display it in string
      let startDate = new Date().toLocaleDateString();
      let startTime = new Date().toLocaleTimeString();
-     start.textContent =  " Start: " + startDate + " " + startTime;
+     start.textContent =  " Start: " + startDate + " " + startTime+ "  ";
     //End Citation
     
     // console.log( newActiveTask );
@@ -57,13 +57,51 @@ myForm.addEventListener( 'submit', (event) => {
     newActiveTask.prepend( newCheckBox );
 
     newActiveTask.append(start.textContent);
-    
 
-    // console.log( newActiveTask.textContent );
-    // console.log( newActiveTask );
+    //Create Delete button
+    //Citation
+    //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_pushbutton_create    
+    let deleteButton = document.createElement("BUTTON");
+    let buttonText = document.createTextNode("Delete");
+    deleteButton.appendChild(buttonText);
+    //End Citation
+    
+    //Append Delete Button
+    newActiveTask.append(deleteButton);     
+
+    //Create Edit Task Button
+    // let editButton = document.createElement("BUTTON");
+    // let editButtonText = document.createTextNode("Edit Task");
+    // editButton.appendChild(editButtonText);
+
+    // let divElement = document.createElement( 'div' );
+    // divElement.append(editButton);
+
+    // newActiveTask.append(divElement);
 
     //Append the newly created list element to the Active To-Do List
     activeList.appendChild( newActiveTask );
+
+    /**
+     * Add Event Listener: Delete Button 
+     */
+    deleteButton.addEventListener('click', (event) => {
+        event.preventDefault();        
+        newActiveTask.remove();        
+
+    });
+
+    // /**
+    //  * Add Event Listener: Edit Button 
+    //  */
+    // const myEditButton =document.querySelector(  'div > button');
+    // myEditButton.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     const updateTask = document.createElement()
+
+    // });
+    
+
 
     /**
      * Add Event Listener: CheckBox in Active To-Do List
@@ -82,6 +120,16 @@ myForm.addEventListener( 'submit', (event) => {
     } );
 
 });
+
+// function createDeleteButton(){
+//     let x = document.createElement("BUTTON");
+//     let t = document.createTextNode("Delete");
+//     x.appendChild(t);
+//     return x;
+// }
+
+
+
 
 
 
