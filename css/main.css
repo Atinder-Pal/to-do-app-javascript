@@ -1,0 +1,15 @@
+form, footer{
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 50px;
+    width: 50vw;
+}
+
+fieldset:nth-of-type(2), fieldset:nth-of-type(3){   
+   
+    max-height: fit-content;   
+    
+}
+
+
