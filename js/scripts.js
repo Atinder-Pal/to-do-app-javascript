@@ -8,6 +8,10 @@ console.log( myForm );
 const newTaskField = document.getElementById('new-task');
 console.log( newTaskField );
 
+//Grab the Pending To-Do List
+const pendingList = document.getElementById('pending-to-do-list');
+console.log(pendingList);
+
 //Grab the Active To-Do List
 const activeList = document.querySelector('#active-to-do-list');
 console.log( activeList );
@@ -30,34 +34,22 @@ myForm.addEventListener( 'submit', (event) => {
     //Clear the newTaskField after a new task is submitted
     newTaskField.value="";
     
-    //Create a new Task in the Active To-Do List and a CheckBox for that task
-    const newActiveTask = document.createElement( 'li' );
-
-    //Create a checkbox
-    const newCheckBox = document.createElement( 'input' );
-    newCheckBox.type = "checkBox";
-
-    //Create Date Time element
-     const start = document.createElement(  'span' );   
-     //start.textContent = getCurrentDate().showDate;
-     
-     //Citation
-     //Took hep from 'Adolf Stary' for understanding how to pull date and display it in string
-     let startDate = new Date().toLocaleDateString();
-     let startTime = new Date().toLocaleTimeString();
-     start.textContent =  " Start: " + startDate + " " + startTime+ "  ";
-    //End Citation
+    //Create a new Task in the Pending To-Do List and a CheckBox for that task
+    const newPendingTask = document.createElement( 'li' );       
     
-    // console.log( newActiveTask );
 
     //Assign New task value to newly created list element 
-    newActiveTask.textContent= `${newTask}`;
+    newPendingTask.textContent= `${newTask}`;    
+    
+    /**
+     * Create and append Start button to pendingto-do item
+     */
+    let startButton = document.createElement("BUTTON");
+    let startbuttonText = document.createTextNode("Start");
+    startButton.appendChild( startbuttonText );
 
-    //Prepend the check box to the list element 
-    newActiveTask.prepend( newCheckBox );
-
-    newActiveTask.append(start.textContent);
-
+    newPendingTask.append( startButton);   
+    
     //Create Delete button
     //Citation
     //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_pushbutton_create    
@@ -67,66 +59,73 @@ myForm.addEventListener( 'submit', (event) => {
     //End Citation
     
     //Append Delete Button
-    newActiveTask.append(deleteButton);     
-
-    //Create Edit Task Button
-    // let editButton = document.createElement("BUTTON");
-    // let editButtonText = document.createTextNode("Edit Task");
-    // editButton.appendChild(editButtonText);
-
-    // let divElement = document.createElement( 'div' );
-    // divElement.append(editButton);
-
-    // newActiveTask.append(divElement);
-
-    //Append the newly created list element to the Active To-Do List
-    activeList.appendChild( newActiveTask );
+    newPendingTask.append(deleteButton);
 
     /**
      * Add Event Listener: Delete Button 
      */
     deleteButton.addEventListener('click', (event) => {
         event.preventDefault();        
-        newActiveTask.remove();        
-
-    });
-
-    // /**
-    //  * Add Event Listener: Edit Button 
-    //  */
-    // const myEditButton =document.querySelector(  'div > button');
-    // myEditButton.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     const updateTask = document.createElement()
-
-    // });
-    
+        newPendingTask.remove();       
+    }); 
+   
+    /**
+     *  Append the newly created list element to Pending To-Do List 
+     */
+    pendingList.appendChild( newPendingTask );
 
 
     /**
-     * Add Event Listener: CheckBox in Active To-Do List
+     * Add Event Listener: Start button
      */
-    newCheckBox.addEventListener( 'click', (event) => {
-        //Disable the check box for Completed Tasks List element
-        newCheckBox.disabled = true;
-        let endDate= new Date().toLocaleDateString();
-        let endTime = new Date().toLocaleTimeString();
-        const end = document.createElement(  'span' );        
-        end.textContent = " End: "+ endDate+ " "+ endTime;
-        newActiveTask.append(end.textContent);
+    startButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        //Create Date Time element
+        const start = document.createElement(  'span' );   
+                
+        //Citation
+        //Took hep from 'Adolf Stary' for understanding how to pull date and display it in string
+        let startDate = new Date().toLocaleDateString();
+        let startTime = new Date().toLocaleTimeString();
+        start.textContent =  " Start: " + startDate + " " + startTime+ "  ";
+        //End Citation
+
+        startButton.remove();
+        //Create a checkbox
+        const newCheckBox = document.createElement( 'input' );
+        newCheckBox.type = "checkBox";
+        //Prepend the check box to the list element 
+        newPendingTask.prepend( newCheckBox );
+        //Append Start label with time stamp
+        newPendingTask.append(start.textContent);
         
-        //Move the checked list element from Active To-Do List to Completed Task list
-        completedList.appendChild( newActiveTask );        
-    } );
+        //Create a new Task in the Active To-Do List and a CheckBox for that task
+        const newActiveTask = document.createElement( 'span' );
+        newActiveTask.append(newPendingTask);                      
+
+        //Append the newly created list element to the Active To-Do List
+        activeList.appendChild(newActiveTask);
+
+        /**
+         * Add Event Listener: CheckBox in Active To-Do List
+         */
+        newCheckBox.addEventListener( 'click', (event) => {
+            //Disable the check box for Completed Tasks List element
+            newCheckBox.disabled = true;
+            let endDate= new Date().toLocaleDateString();
+            let endTime = new Date().toLocaleTimeString();
+            const end = document.createElement(  'span' );        
+            end.textContent = " End: "+ endDate+ " "+ endTime;
+            newActiveTask.append(end.textContent);
+            
+            //Move the checked list element from Active To-Do List to Completed Task list
+            completedList.appendChild( newActiveTask );        
+        } );  
+
+    });
 
 });
 
-// function createDeleteButton(){
-//     let x = document.createElement("BUTTON");
-//     let t = document.createTextNode("Delete");
-//     x.appendChild(t);
-//     return x;
-// }
 
 
 
